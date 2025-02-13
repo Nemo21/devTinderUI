@@ -3,12 +3,13 @@ import axios from 'axios';
 import React from 'react'
 
 const Login = () => {
-  const[emailId,setEmailId]=useState("lanaray0901@gmail.com");
+  const[emailId,setEmailId]=useState("LanaRay0901@gmail.com");
   const[password,setPassword]=useState("LanaRay0901!")
   
   const handleLogin=async()=>{
     try {
       const res=await axios.post("http://localhost:6969/login",{emailId,password},{withCredentials:true})
+      console.log(res)
     } catch (error) {
       console.error(error)
     }
@@ -42,7 +43,10 @@ const Login = () => {
               </label>
             </div>
             <div className="form-control mt-6 flex justify-center">
-              <button className="btn btn-primary" onClick={handleLogin}>Login</button>
+              {
+                // so basically fuck onclick and javascript functions in general  
+              }
+              <button className="btn btn-primary" onClick={handleLogin()}>Login</button>
             </div>
           </form>
         </div>
