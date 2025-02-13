@@ -12,11 +12,12 @@ const Login = () => {
   const[password,setPassword]=useState("KendrickLamar0901!")
   const dispatch=useDispatch()
   const navigate=useNavigate()
-  const handleLogin=async()=>{
+  const handleLogin=async(e)=>{
+    e.preventDefault()
     try {
       const res=await axios.post(BASE_URL+"/login",{emailId,password},{withCredentials:true})
       dispatch(addUser(res.data))
-      return navigate("/")
+      return navigate("/feed")
     } catch (error) {
       console.error(error)
     }
@@ -53,7 +54,7 @@ const Login = () => {
               {
                 // so basically fuck onclick and javascript functions in general  
               }
-              <button className="btn btn-primary" onClick={handleLogin()}>Login</button>
+              <button className="btn btn-primary" onClick={(e)=>handleLogin(e)}>Login</button>
             </div>
           </form>
         </div>
