@@ -1,15 +1,22 @@
 import { useState } from 'react';
 import axios from 'axios';
 import React from 'react'
+import { useDispatch } from 'react-redux';
+import { addUser } from '../utils/userSlice';
+import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../utils/constants';
+
 
 const Login = () => {
-  const[emailId,setEmailId]=useState("LanaRay0901@gmail.com");
-  const[password,setPassword]=useState("LanaRay0901!")
-  
+  const[emailId,setEmailId]=useState("kendricklamar0901@gmail.com");
+  const[password,setPassword]=useState("KendrickLamar0901!")
+  const dispatch=useDispatch()
+  const navigate=useNavigate()
   const handleLogin=async()=>{
     try {
-      const res=await axios.post("http://localhost:6969/login",{emailId,password},{withCredentials:true})
-      console.log(res)
+      const res=await axios.post(BASE_URL+"/login",{emailId,password},{withCredentials:true})
+      dispatch(addUser(res.data))
+      return navigate("/")
     } catch (error) {
       console.error(error)
     }
@@ -21,7 +28,7 @@ const Login = () => {
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold">Login now to devTinder</h1>
           <p className="py-6">
-            Connect with developers who have social skills of an doorknob
+            Connect with developers who have social skills of a doorknob
             just like you. All the fun of Tinder without the commitment of asslicking 
           </p>
         </div>
