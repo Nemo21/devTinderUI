@@ -10,6 +10,7 @@ import { BASE_URL } from '../utils/constants';
 const Login = () => {
   const[emailId,setEmailId]=useState("kendricklamar0901@gmail.com");
   const[password,setPassword]=useState("KendrickLamar0901!")
+  const[error,setError]=useState("")
   const dispatch=useDispatch()
   const navigate=useNavigate()
   const handleLogin=async(e)=>{
@@ -19,7 +20,7 @@ const Login = () => {
       dispatch(addUser(res.data))
       return navigate("/feed")
     } catch (error) {
-      console.error(error)
+      setError(error.response.data)
     }
   }
   return (
@@ -34,7 +35,7 @@ const Login = () => {
           </p>
         </div>
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <form className="card-body">
+          <div className="card-body">
             <div className="form-control">
               <label className="label my-2">
                 <span className="label-text">Email</span>
@@ -56,7 +57,8 @@ const Login = () => {
               }
               <button className="btn btn-primary" onClick={(e)=>handleLogin(e)}>Login</button>
             </div>
-          </form>
+            <p className='text-red-500'>{error}</p>
+          </div>
         </div>
       </div>
     </div>
