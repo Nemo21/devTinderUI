@@ -17,8 +17,10 @@ const EditProfile = ({ user }) => {
   const saveProfile = async () => {
     //Clear Errors
     setError("");
+    console.log("calling the save profile function")
     try {
-      const res = await axios.patch(
+      console.log("Making an api call now")
+      const res = await axios.put(
         BASE_URL + "/profile/edit",
         {
           firstName,
@@ -30,13 +32,15 @@ const EditProfile = ({ user }) => {
         },
         { withCredentials: true }
       );
-      dispatch(addUser(res?.data?.data));
+      console.log(res)
+      console.log("Api call made")
+      dispatch(addUser(res?.data));
       setShowToast(true);
       setTimeout(() => {
         setShowToast(false);
       }, 3000);
     } catch (err) {
-      setError(err.response.data);
+      setError(err.message);
     }
   };
   return (
