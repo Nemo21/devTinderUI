@@ -18,7 +18,7 @@ const Login = () => {
     try {
       const res=await axios.post(BASE_URL+"/login",{emailId,password},{withCredentials:true})
       dispatch(addUser(res.data))
-      return navigate("/feed")
+      return navigate("/")
     } catch (error) {
       setError(error.response.data)
     }
